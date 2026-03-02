@@ -1,59 +1,71 @@
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from flask import Flask
+import os
 
-app = FastAPI()
+app = Flask(__name__)
 
-@app.get("/", response_class=HTMLResponse)
-async def read_items():
-    return """
+# --- ДАННЫЕ ДЛЯ МОДЕРАЦИИ (ЗАПОЛНИ СВОИ) ---
+MY_FULL_NAME = "Иванов Иван Иванович"  # Твое ФИО
+MY_INN = "123456789012"                # Твой ИНН
+MY_EMAIL = "support@vnykline.ru"       # Твоя почта
+BOT_URL = "https://t.me/ТВОЙ_БОТ"      # Ссылка на твоего бота
+
+@app.route('/')
+def index():
+    return f"""
     <!DOCTYPE html>
     <html lang="ru">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>VnykLine - Официальный сайт</title>
+        <title>VnykLine IT-Support | Услуги настройки ПО</title>
         <style>
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background-color: #f4f7f6; }
-            header { background: #2c3e50; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
-            .content { background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            h1, h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-            .tariff { background: #e8f4fd; padding: 15px; border-left: 5px solid #3498db; margin: 10px 0; }
-            footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #777; }
-            .contact { color: #3498db; font-weight: bold; }
+            body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; display: flex; flex-direction: column; min-height: 100vh; align-items: center; }}
+            .container {{ background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); max-width: 600px; width: 100%; text-align: center; flex-grow: 1; }}
+            h1 {{ color: #2c3e50; margin-bottom: 1rem; border-bottom: 2px solid #3498db; display: inline-block; padding-bottom: 5px; }}
+            p {{ line-height: 1.6; color: #7f8c8d; font-size: 1.1rem; }}
+            .services {{ margin-top: 2rem; text-align: left; }}
+            .service-item {{ background: #fdfdfd; padding: 1.2rem; border-left: 5px solid #3498db; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #eee; }}
+            .price {{ font-weight: bold; color: #2ecc71; font-size: 1.2rem; }}
+            .btn {{ display: inline-block; background: #3498db; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 30px; margin-top: 2rem; font-weight: bold; transition: 0.3s; }}
+            .btn:hover {{ background: #2980b9; transform: translateY(-2px); }}
+            footer {{ margin-top: 3rem; text-align: center; font-size: 0.85rem; color: #95a5a6; border-top: 1px solid #ddd; padding-top: 20px; width: 100%; max-width: 600px; }}
         </style>
     </head>
     <body>
-        <header>
-            <h1>VnykLine Service</h1>
-        </header>
-        <div class="content">
-            <h2>О сервисе</h2>
-            <p>VnykLine предоставляет услуги защищенного доступа в интернет через протоколы VLESS/Shadowsocks. Мы гарантируем высокую скорость и конфиденциальность ваших данных.</p>
+        <div class="container">
+            <h1>VnykLine IT-Support</h1>
+            <p>Профессиональные услуги по индивидуальной настройке сетевого ПО и конфигурации защищенных протоколов связи (VLESS/Reality).</p>
             
-            <h2>Наши тарифы</h2>
-        <div class="tariff">
-            <strong>Недельный драйв:</strong> 40 рублей / 7 дней (Безлимит, 1 устройство)
+            <div class="services">
+                <div class="service-item">
+                    <strong>📦 Техническая настройка (Базовая)</strong><br>
+                    Удаленная конфигурация и поддержка клиента в течение 7 дней.<br>
+                    <span class="price">Стоимость: 40.00 ₽</span>
+                </div>
+                <div class="service-item">
+                    <strong>🚀 Комплексное сопровождение (Max)</strong><br>
+                    Полная настройка шлюза и мониторинг соединения на 30 дней.<br>
+                    <span class="price">Стоимость: 80.00 ₽</span>
+                </div>
+            </div>
+            
+            <p>Все заказы обрабатываются автоматически через нашу систему в Telegram.</p>
+            <a href="{BOT_URL}" class="btn">🚀 Перейти к настройке в Telegram</a>
         </div>
-        <div class="tariff">
-            <strong>Месячный комфорт:</strong> 80 рублей / 30 дней (Безлимит, 1 устройство) - Экономия 50%!
-        </div>
-
-            <h2>Юридическая информация</h2>
-            <p><strong>Политика конфиденциальности:</strong> Мы не храним логи ваших посещений. Для работы сервиса используется только ваш Telegram ID.</p>
-            <p><strong>Условия возврата:</strong> Возврат средств возможен в течение 24 часов с момента оплаты, если сервис не работает по техническим причинам.</p>
-            <p><strong>Безопасность:</strong> Оплата производится через защищенный шлюз Robokassa. Мы не имеем доступа к данным ваших карт.</p>
-
-            <h2>Контакты</h2>
-            <p>По всем вопросам: <span class="contact">@vnyyykk</span> (Telegram)</p>
-            <p>Email: reklamavkvideo@gmail.com </p>
-        </div>
+        
         <footer>
-            &copy; 2026 VnykLine. Все права защищены. Индивидуальный предприниматель / Самозанятый.
+            <p>&copy; 2026 VnykLine. Все права защищены.</p>
+            <p>
+                <strong>Самозанятый:</strong> {MY_FULL_NAME}<br>
+                <strong>ИНН:</strong> {MY_INN}<br>
+                <strong>Email для связи:</strong> {MY_EMAIL}
+            </p>
+            <p style="font-size: 0.7rem;">Сайт не является публичной офертой. Оплата производится за консультационные и технические услуги.</p>
         </footer>
     </body>
     </html>
     """
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
