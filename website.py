@@ -3,9 +3,9 @@ import os
 
 app = Flask(__name__)
 
-# --- ТВОИ ДАННЫЕ (ЗАПОЛНИ) ---
-MY_EMAIL = "reklamavkvideo@gmail.com"  # Твоя почта
-BOT_URL = "https://t.me/vnykpn_bot"
+# --- НАСТРОЙКИ ---
+MY_EMAIL = "reklamavkvideo@gmail.com"        # Твоя почта
+BOT_LINK = "https://t.me/vnykpn_bot"    # Ссылка на твоего бота
 
 @app.route('/')
 def index():
@@ -17,26 +17,25 @@ def index():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VnykLine IT-Support</title>
         <style>
-            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #333; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }}
-            .card {{ text-align: center; padding: 2rem; max-width: 400px; }}
-            h1 {{ font-size: 2rem; margin-bottom: 1rem; color: #000; }}
-            p {{ color: #666; line-height: 1.5; margin-bottom: 2rem; }}
-            .btn {{ background: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; transition: 0.3s; }}
-            .btn:hover {{ opacity: 0.8; }}
-            footer {{ position: absolute; bottom: 20px; font-size: 0.8rem; color: #999; text-align: center; width: 100%; }}
+            body {{ font-family: -apple-system, sans-serif; background-color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #000; }}
+            .container {{ text-align: center; padding: 20px; max-width: 400px; }}
+            h1 {{ font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 10px; }}
+            p {{ font-size: 1.1rem; color: #666; margin-bottom: 40px; line-height: 1.4; }}
+            .btn {{ background: #000; color: #fff; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; transition: 0.2s; }}
+            .btn:hover {{ transform: scale(1.05); }}
+            .contact {{ margin-top: 50px; font-size: 0.9rem; color: #aaa; }}
+            .contact a {{ color: #aaa; text-decoration: none; border-bottom: 1px solid #eee; }}
         </style>
     </head>
     <body>
-        <div class="card">
+        <div class="container">
             <h1>VnykLine</h1>
-            <p>Услуги по технической поддержке и настройке сетевого программного обеспечения.</p>
-            <a href="{BOT_URL}" class="btn">Заказать в Telegram</a>
+            <p>Удаленная настройка сетевого ПО и техническое сопровождение протоколов связи.</p>
+            <a href="{BOT_LINK}" class="btn">Запустить помощника</a>
+            <div class="contact">
+                Support: <a href="mailto:{MY_EMAIL}">{MY_EMAIL}</a>
+            </div>
         </div>
-        <footer>
-            <p>Самозанятый: {MY_FULL_NAME}<br>
-            ИНН: {MY_INN} | Email: {MY_EMAIL}</p>
-            <p>&copy; 2026 VnykLine</p>
-        </footer>
     </body>
     </html>
     """
