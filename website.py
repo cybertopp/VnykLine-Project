@@ -44,8 +44,8 @@ async def read_items():
             <p><strong>Безопасность:</strong> Оплата производится через защищенный шлюз Robokassa. Мы не имеем доступа к данным ваших карт.</p>
 
             <h2>Контакты</h2>
-            <p>По всем вопросам: <span class="contact">@vnyyyyk</span> (Telegram)</p>
-            <p>Email: reklamavkvideo@gmail.com (или твой личный email)</p>
+            <p>По всем вопросам: <span class="contact">@vnyyykk</span> (Telegram)</p>
+            <p>Email: reklamavkvideo@gmail.com </p>
         </div>
         <footer>
             &copy; 2026 VnykLine. Все права защищены. Индивидуальный предприниматель / Самозанятый.
