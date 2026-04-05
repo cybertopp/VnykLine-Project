@@ -1,3 +1,4 @@
+# main.py
 import logging
 import asyncio
 from aiogram import Bot, Dispatcher, F, types
@@ -6,6 +7,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import api_server
 from config import TOKEN 
 
+logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -20,19 +22,20 @@ def main_menu():
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("🦾 Добро пожаловать в VnykLine!\nТвой личный VPN-хаб.", reply_markup=main_menu())
+    await message.answer("🦾 Добро пожаловать в **VnykLine**!", reply_markup=main_menu(), parse_mode="Markdown")
 
 @dp.callback_query(F.data == "get_key")
 async def handle_get_key(cb: types.CallbackQuery):
-    await cb.answer("🛠 Создаю персональный конфиг...")
-    res = api_server.get_or_create_user_link(cb.from_user.id)
-    await cb.message.answer(res, parse_mode="Markdown")
-
-@dp.callback_query(F.data.in_(["profile", "bonuses", "top_10", "buy_key"]))
-async def handle_rest(cb: types.CallbackQuery):
-    await cb.answer("В разработке...")
+    await cb.answer("🛠 Генерирую...")
+    try:
+        res = api_server.get_or_create_user_link(cb.from_user.id)
+        await cb.message.answer(res, parse_mode="Markdown")
+    except Exception as e:
+        logging.error(f"Ошибка при нажатии кнопки: {e}")
+        await cb.message.answer("❌ Ошибка при создании ключа. Попробуй позже.")
 
 async def main():
+    print("--- БОТ ЗАПУЩЕН ---")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

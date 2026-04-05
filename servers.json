@@ -25,11 +25,11 @@
         "protocol": "vless",
         "security": "reality",
         "sni": "max.ru",
-        "pbk": "0Exv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4",
+        "pbk": "0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4",
         "sid": "59",
         "fp": "random",
         "type": "grpc",
-        "serviceName": ""
+        "serviceName": "vnyk-grpc"
       }
     }
   },
@@ -48,11 +48,11 @@
         "protocol": "vless",
         "security": "reality",
         "sni": "max.ru",
-        "pbk": "Pd5Mw-ayiju1HACOCZ7MkGMub_5C-_LhhV6XBxzAGhg",
+        "pbk": "Pd5Mw-ayiju1HACOCZ7MkGMub_5C-LhhV6XBxZAGhg",
         "sid": "1783b7",
         "fp": "random",
         "type": "grpc",
-        "serviceName": ""
+        "serviceName": "vnyk-grpc"
       }
     }
   }
