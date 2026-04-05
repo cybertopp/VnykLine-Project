@@ -1,38 +1,57 @@
-import requests, uuid, json
-from config import PANEL_URL, PANEL_LOGIN, PANEL_PASSWORD, ENABLED_INBOUNDS, INBOUND_3
+import requests
+import json
+import base64
+from config import *
 
-def get_session():
+def get_session(url, login, password):
     session = requests.Session()
-    login_url = f"{PANEL_URL.rstrip('/')}/login"
     try:
-        res = session.post(login_url, data={"username": PANEL_LOGIN, "password": PANEL_PASSWORD}, timeout=10)
+        res = session.post(f"{url.rstrip('/')}/login", data={"username": login, "password": password}, timeout=7)
         if res.status_code == 200: return session
     except: return None
 
-def add_user_to_server(user_id):
-    session = get_session()
-    if not session: return None
-    uid_str = str(user_id)
-    found_uuid = None
+def upload_to_github(filename, content):
+    # Функция для авто-загрузки конфига на твой Гитхаб
+    url = f"https://api.github.com/repos/{GH_REPO}/contents/users/{filename}.json"
+    headers = {"Authorization": f"token {GH_TOKEN}", "Accept": "application/vnd.github.v3+json"}
+    
+    # Проверяем, есть ли уже такой файл (чтобы получить sha)
+    res = requests.get(url, headers=headers)
+    sha = res.json().get('sha') if res.status_code == 200 else None
 
-    for ib_id in ENABLED_INBOUNDS:
-        try:
-            res = session.get(f"{PANEL_URL.rstrip('/')}/panel/api/inbounds/get/{ib_id}")
-            clients = json.loads(res.json()['obj']['settings']).get('clients', [])
-            for c in clients:
-                if uid_str in c.get('email', ''):
-                    found_uuid = c.get('id')
-                    break
-        except: continue
+    payload = {
+        "message": f"Update config for {filename}",
+        "content": base64.b64encode(content.encode()).decode(),
+    }
+    if sha: payload["sha"] = sha
+    
+    requests.put(url, headers=headers, json=payload)
+    return f"https://raw.githubusercontent.com/{GH_REPO}/main/users/{filename}.json"
 
-    client_uuid = found_uuid if found_uuid else str(uuid.uuid4())
-    remark = f"Vnyk_{user_id}"
+def get_or_create_user_link(user_id):
+    uid_str = f"Vnyk_{user_id}"
+    
+    # 1. Регаем в панелях
+    for p_url, p_log, p_pass, inbounds in [(PANEL_URL, PANEL_LOGIN, PANEL_PASSWORD, ENABLED_INBOUNDS), 
+                                          (PANEL_MS_URL, PANEL_MS_LOGIN, PANEL_MS_PASS, [1])]:
+        s = get_session(p_url, p_log, p_pass)
+        if s:
+            for ib in inbounds:
+                payload = {"id": ib, "settings": json.dumps({"clients": [{"id": SHARED_UUID, "email": uid_str, "enable": True}]})}
+                s.post(f"{p_url.rstrip('/')}/panel/api/inbounds/addClient", json=payload)
 
-    if not found_uuid:
-        for ib_id in ENABLED_INBOUNDS:
-            url = f"{PANEL_URL.rstrip('/')}/panel/api/inbounds/addClient"
-            payload = {"id": int(ib_id), "settings": json.dumps({"clients": [{"id": client_uuid, "email": remark if ib_id == 1 else f"{remark}_sw", "enable": True, "tgId": uid_str, "limitIp": 2}]})}
-            session.post(url, json=payload)
+    # 2. Формируем текст файла (все сервера в кучу)
+    config_content = (
+        f"vless://{SHARED_UUID}@167.17.181.252:39656?security=reality&sni=aws.amazon.com&fp=chrome&pbk=8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I&sid=36#SW_Main\n"
+        f"vless://{SHARED_UUID}@167.17.181.252:443?security=reality&sni=max.ru&fp=random&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59&type=grpc#SW_LTE\n"
+        f"vless://{SHARED_UUID}@46.29.167.16:443?security=reality&sni=ya.ru&fp=chrome&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59#RUS_Moscow"
+    )
 
-    c = INBOUND_3
-    return f"vless://{client_uuid}@{c['ip']}:{c['port']}?security=reality&sni={c['sni']}&fp={c['fp']}&pbk={c['pbk']}&sid={c['sid']}&type=grpc&serviceName=grpc#{remark}"
+    # 3. Заливаем на GitHub и получаем ПЕРСОНАЛЬНУЮ ссылку
+    final_link = upload_to_github(uid_str, config_content)
+
+    return (
+        f"🎯 **Твоя персональная подписка**\n\n"
+        f"Ссылка (GitHub):\n`{final_link}`\n\n"
+        f"🚀 *Внутри: Швейцария (2 узла) и Москва.*"
+    )

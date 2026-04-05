@@ -1,35 +1,18 @@
-BOT_TOKEN = "8377215857:AAEO-pqlqrAvSpUAl_9xBu14Bq5bHXsU594"
+TOKEN = "8377215857:AAEO-pqlqrAvSpUAl_9xBu14Bq5bHXsU594"
 DB_NAME = "vnykline.db"
 ADMIN_ID = 8313482374
+SHARED_UUID = "2668586c-486a-493a-86c3-1d0637689104"
 
-# Данные ЮKassa
-SHOP_ID = "1289437"
-SHOP_API_KEY = "live_LFZm3j4vKRYkgrR7KHncvsiEAFWb04Ve0tTq5ANNQl4"
+# GitHub данные (чтобы бот мог сам создавать файлы)
+GH_TOKEN = "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" # Надо создать в настройках GitHub
+GH_REPO = "cybertopp/VnykLine-Project"
 
-# Данные панели
+# ПАНЕЛИ
 PANEL_URL = "http://167.17.181.252:2053/sub"
 PANEL_LOGIN = "admin"
 PANEL_PASSWORD = "B2DB0Yfu65uDjsIb"
-
 ENABLED_INBOUNDS = [1, 3]
 
-# Настройки для генерации ссылок
-# Инбаунд №1 (Обычный Reality)
-INBOUND_1 = {
-    "ip": "167.17.181.252",
-    "port": 39656,
-    "sid": "36",
-    "pbk": "8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I",
-    "sni": "aws.amazon.com",
-    "fp": "chrome"
-}
-
-# Инбаунд №3 (gRPC для обхода глушилок)
-INBOUND_3 = {
-    "ip": "167.17.181.252",
-    "port": 443,
-    "sid": "59",
-    "pbk": "0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4",
-    "sni": "max.ru",
-    "fp": "random"
-}
+PANEL_MS_URL = "http://46.29.167.16:2053"
+PANEL_MS_LOGIN = "admin"
+PANEL_MS_PASS = "ZWAkiSodm1trXj4"
