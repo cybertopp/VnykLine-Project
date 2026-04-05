@@ -1,0 +1,82 @@
+{
+  "outbounds": [
+    {
+      "tag": "🇷🇺 VnykLine | Moscow",
+      "type": "vless",
+      "server": "46.29.167.16",
+      "server_port": 443,
+      "uuid": "2668586c-486a-493a-86c3-1d0637689104",
+      "transport": {
+        "type": "grpc",
+        "service_name": "vnyk-grpc"
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "Pd5Mw-ayiju1HACOCZ7MkGMub_5C-LhhV6XBxZAGhg",
+          "short_id": "1783b7"
+        }
+      }
+    },
+    {
+      "tag": "🇨🇭 VnykLine | Main",
+      "type": "vless",
+      "server": "167.17.181.252",
+      "server_port": 39656,
+      "uuid": "2668586c-486a-493a-86c3-1d0637689104",
+      "tls": {
+        "enabled": true,
+        "server_name": "aws.amazon.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I",
+          "short_id": "36"
+        }
+      }
+    },
+    {
+      "tag": "🇨🇭 VnykLine | SW LTE",
+      "type": "vless",
+      "server": "167.17.181.252",
+      "server_port": 443,
+      "uuid": "2668586c-486a-493a-86c3-1d0637689104",
+      "transport": {
+        "type": "grpc",
+        "service_name": "vnyk-grpc"
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4",
+          "short_id": "59"
+        }
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "1.1.1.1"
+    ]
+  }
+}
