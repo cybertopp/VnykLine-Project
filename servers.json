@@ -1,0 +1,59 @@
+{
+  "server_switzerland": {
+    "ip": "167.17.181.252",
+    "name": "Switzerland Main",
+    "sub_port": 8080,
+    "panel_port": 2053,
+    "root_path": "/sub",
+    "sub_path": "/",
+    "json_path": "/json/",
+    "inbounds": {
+      "1": {
+        "remark": "сн VnykMain",
+        "port": 39656,
+        "protocol": "vless",
+        "security": "reality",
+        "sni": "aws.amazon.com",
+        "pbk": "8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I",
+        "sid": "36",
+        "fp": "chrome",
+        "type": "tcp"
+      },
+      "3": {
+        "remark": "ru RUS | LTE ОБХОД",
+        "port": 443,
+        "protocol": "vless",
+        "security": "reality",
+        "sni": "max.ru",
+        "pbk": "0Exv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4",
+        "sid": "59",
+        "fp": "random",
+        "type": "grpc",
+        "serviceName": ""
+      }
+    }
+  },
+  "server_moscow": {
+    "ip": "46.29.167.16",
+    "name": "Moscow Edge",
+    "sub_port": 8080,
+    "panel_port": 2053,
+    "root_path": "",
+    "sub_path": "/sub/",
+    "json_path": "/json/",
+    "inbounds": {
+      "2": {
+        "remark": "RU RUS | LTE Moscow",
+        "port": 443,
+        "protocol": "vless",
+        "security": "reality",
+        "sni": "max.ru",
+        "pbk": "Pd5Mw-ayiju1HACOCZ7MkGMub_5C-_LhhV6XBxzAGhg",
+        "sid": "1783b7",
+        "fp": "random",
+        "type": "grpc",
+        "serviceName": ""
+      }
+    }
+  }
+}
