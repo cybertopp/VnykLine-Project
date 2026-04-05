@@ -1,3 +1,3 @@
-vless://2668586c-486a-493a-86c3-1d0637689104@167.17.181.252:39656?security=reality&sni=aws.amazon.com&fp=chrome&pbk=8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I&sid=36#Vnyk_Main
-vless://2668586c-486a-493a-86c3-1d0637689104@167.17.181.252:443?security=reality&sni=max.ru&fp=random&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59&type=grpc#Vnyk_SW_LTE
-vless://2668586c-486a-493a-86c3-1d0637689104@46.29.167.16:443?security=reality&sni=ya.ru&fp=chrome&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59#Vnyk_RUS_Moscow
+vless://2668586c-486a-493a-86c3-1d0637689104@167.17.181.252:39656?security=reality&sni=aws.amazon.com&fp=chrome&pbk=8PBErDe6pigy1AKACc9iY1o_bFM1pLatn6XMQ0M6B3I&sid=36&type=tcp&headerType=none#%F0%9F%87%A8%F0%9F%87%AD%20VnykLine%20%7C%20Main
+vless://2668586c-486a-493a-86c3-1d0637689104@167.17.181.252:443?security=reality&sni=max.ru&fp=random&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59&type=grpc&serviceName=grpc-video&mode=multi#%F0%9F%87%A8%F0%9F%87%AD%20VnykLine%20%7C%20SW%20LTE
+vless://2668586c-486a-493a-86c3-1d0637689104@46.29.167.16:443?security=reality&sni=max.ru&fp=random&pbk=0xExv6ZJJgyUfQ7Az8Uu_RsizPPqK6hp1jD1wgugzS4&sid=59&type=tcp&headerType=none#%F0%9F%87%B7%F0%9F%87%BA%20VnykLine%20%7C%20Moscow
